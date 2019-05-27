@@ -1,3 +1,4 @@
+//Invoker
 class Button{
     Command command;
     public Button(Command command){
@@ -8,10 +9,12 @@ class Button{
     }
 }
 
+//Command interface
 interface Command{
     void execute();
 }
 
+//Concrete Command
 class RingCommand implements Command{
     Ring alram;
 
@@ -25,6 +28,7 @@ class RingCommand implements Command{
     }
 }
 
+//Concrete Command
 class TorchCommand implements Command{
     Torch Torch;
     public TorchCommand(Torch Torch){
@@ -37,6 +41,8 @@ class TorchCommand implements Command{
     }
 }
 
+
+//Client
 class Client2{
     public static void main(String[] args) {
         Torch l = new Torch();
