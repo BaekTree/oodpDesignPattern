@@ -1,19 +1,28 @@
 /**
  * 
- * Design Pattern: Command pattern
- * Components: Invoker, Receivers, Command interface, Concrete Command
- * Invoker: Button
+ * Design Pattern: Command pattern 
+ * Components: Invoker, Receivers, Command interface, Concrete Command 
+ * Invoker: Button 
  * Reciever: Torch, Ring class
- * Command Interface: Command
+ * Command Interface: Command 
  * Concrete Command: TorchComand, RingCommand
  * 
- * One Invoker calls a functions. This makes other class work.
- * Recievers are the entity to work. They have the functions.
  * 
  * 
  * 
+ * Command (e.g., Command, UndoableCommand), which defines an interface to
+ * perform or undo an action.
  * 
+ * Receiver (e.g., Torch, Ring), which knows how to perform the actions. 
  * 
+ * ConcreteCommand (e.g., TorchComand, RingCommand),
+ * which implements the Command interface and delegates the execution of the
+ * action to the Receiver. 
+ * 
+ * Client (e.g., Client1), which creates the concrete
+ * commands and binds the concrete commands to their receivers. 
+ * 
+ * Invoker (e.g., Button), which asks the command to carry out the action.
  * 
  */
 //Reciever 1
@@ -38,9 +47,7 @@ class ButtonT{
     public void pressed(){
         theTorch.turnOn();
     }
-
 }
-
 
 class ButtonR{
     Ring Ring;
@@ -51,7 +58,6 @@ class ButtonR{
         Ring.turnOn();
     }
 }
-
 
 class Client1{    
     public static void main(String args[]){
