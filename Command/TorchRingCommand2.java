@@ -10,6 +10,9 @@
  *  전략:
  *      버튼을 누르면 작동을 하는 방법은 유지한다. 
  *      횃불과 종 대신에 command interface을 만든다. 
+ *      concrete command는 connmand interface을 상속하고, 횃불과 종을 association한다. 
+ *      concrete command: ramp command, ring command
+ *       
  * **/
 
 
