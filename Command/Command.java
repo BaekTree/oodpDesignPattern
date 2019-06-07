@@ -51,6 +51,7 @@ class Ring {
 //Invoker
 class Button{
     Command command;
+    public Button(){}
 
     public Button(Command command){
         this.command = command;
@@ -99,13 +100,17 @@ class TorchCommand implements Command{
 //Client
 class Client2{
     public static void main(String[] args) {
+        Command c;
+        Button bt = new Button();
+
         Torch l = new Torch();
-        Command c = new TorchCommand(l);
-        c.execute();
+        c = new TorchCommand(l);
+        bt.setCommand(c);
+        bt.pressed();
 
         Ring a = new Ring();
         c = new RingCommand(a);
-        c.execute();
-
+        bt.setCommand(c);
+        bt.pressed(); 
     }
 }

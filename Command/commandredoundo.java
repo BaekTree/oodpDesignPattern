@@ -28,25 +28,39 @@
  * 
  **/
 
+import java.util.List;
+import java.util.ArrayList;
 
 //Reciever 1
 class Torch {
     public void turnOn() {
-        System.out.println("turn on the Torch");
+        System.out.println("\tturn on the Torch");
+    }
+
+    public void turnOff(){
+        System.out.println("\tTorch off");
     }
 }
 
 // Reciever 2
 class Ring {
     public void turnOn() {
-        System.out.println("Ring on");
+        System.out.println("\tRing on");
+    }
+
+    public void turnOff(){
+        System.out.println("\tRing off");
     }
 }
 
 //Invoker
 class Button{
     Command command;
+    List<Command> redo = new ArrayList<>();
+    List<Command> undo = new ArrayList<>();
     
+    public Button(){}
+
     public Button(Command command){
         this.command = command;
     }
@@ -55,12 +69,44 @@ class Button{
     }
     public void pressed(){
         command.execute();
+
+        //new feature in redo and undo
+        undo.add(command);
     }
+
+    //new feture in redo
+    //after undo, redo feature can be activated
+    public void redo(){
+        try{
+            Command cmd = redo.get(redo.size()-1);
+            cmd.execute();
+            redo.remove(cmd);
+            undo.add(cmd);
+        }catch(Exception e){
+            System.out.println("\tThere is no action redo");
+        }
+    }
+
+    //new feture undo
+    //after execute one action, undo feature can be activated.
+    //
+    public void undo(){
+        try{
+            Command cmd = undo.get(undo.size()-1);
+            cmd.undo();
+            undo.remove(cmd);
+            redo.add(cmd);
+        }catch(Exception e){
+            System.out.println("\tThere is not action undo");
+        }
+    }
+
 }
 
 //Command interface
 interface Command{
     void execute();
+    void undo();
 }
 
 //Concrete Command
@@ -75,6 +121,12 @@ class RingCommand implements Command{
     public void execute(){
         alram.turnOn();
     }
+
+
+    @Override
+    public void undo(){
+        alram.turnOff();
+    }
 }
 
 //Concrete Command
@@ -88,21 +140,75 @@ class TorchCommand implements Command{
     public void execute(){
         Torch.turnOn();
     }
+
+
+    @Override
+    public void undo(){
+        Torch.turnOff();
+    }
+}
+
+enum Choice{
+    TORCH(0), 
+    RING(1), 
+    REDO(2), 
+    UNDO(3),
+    QUIT(4);
+
+    private int val;
+
+    private Choice(int val){
+        this.val = val;
+    }
+
+    public int getValue(){
+        return val;
+    }
 }
 
 
 
-
 //Client
-class Client2{
+class Client3{
     public static void main(String[] args) {
-        Torch l = new Torch();
-        Command c = new TorchCommand(l);
-        c.execute();
+        
 
-        Ring a = new Ring();
-        c = new RingCommand(a);
-        c.execute();
+        int choice;
+        // Command cmd;
+        Button bt = new Button();
+        Torch tch = new Torch();
+        Ring rng = new Ring();
+        
+        System.out.print("----------Menu---------\n*\tTorch: 0\t*\n*\tRing: 1\t*\n*\tRedo: 2\t*\n*\tUndo: 3\t*\n*\tQuit: 4\t*\n-----------------------\n" );
+        do{
+            System.out.print("Your input: ");
+            java.util.Scanner scan = new java.util.Scanner(System.in);
+            choice = scan.nextInt();
 
+
+
+            //torch mode
+            if(choice == Choice.TORCH.getValue()){
+                Command cmd = new TorchCommand(tch);
+                bt.setCommand(cmd);
+                bt.pressed();
+            }
+            
+            //ring mode
+            if(choice == Choice.RING.getValue()){
+                Command cmd = new RingCommand(rng);
+                bt.setCommand(cmd);
+                bt.pressed();
+            }
+
+            //undo mode
+            if(choice == Choice.UNDO.getValue()){
+                bt.undo();
+            }
+
+            if(choice == Choice.REDO.getValue()){
+                bt.redo();
+            }
+        }while(choice != Choice.QUIT.getValue());
     }
 }
