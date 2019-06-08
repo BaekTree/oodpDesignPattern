@@ -1,6 +1,7 @@
 /**
- * goodCode.java
+ * goodCode1.java
  * 문제가 있는 코드
+ * 문제점:
  * Client는 ClassOne에 dependency 한다.
  * 그런데 ClassOne은 구현책임을 가지고 있어서 concrete하게 구현되어 있다.
  * 따라서 만약 ClassOne의 attribute나 method가 변경되거나, ClassOne과 비슷한 ClassTwo를 만들게 되면,
@@ -18,10 +19,10 @@ class ClassOne{
 }
 
 class Client{
-    ClassOne cls = new ClassOne();  // classOne에 dependency 되어있다. 
+    ClassOne cls = new ClassOne();  // 문제점 1: classOne에 dependency 되어있다. 
     
     public void function(){ 
-        cls.method();               //classOne에 method도 dependency 되어있다. 
+        cls.method();               //문제점2: classOne에 method도 dependency 되어있다. 
                                     //만약 ClassOne이 변경되면 다 싸그리 고쳐야 한다.
     }
     
