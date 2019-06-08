@@ -55,3 +55,4 @@
         * 불려져서 끌려오는 object의 상태나 값에 따라 자기의 값도 변화하기 때문에 dependency한 것이다.
         * parameter로 끌고 오기도 한다.
         * return type으로 끌고 오기도 한다.
+        * new 으로 생성하기도 포함.
