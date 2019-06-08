@@ -6,7 +6,7 @@
  * Interface에 해당하는 ClassOne, ClassTwo 등의 instance을 polymorphysm을 통해서 reference해주어야 한다.
  * 그런데 reference하기 위해서 직접적으로 new ClassOne, new ClassTwo등을 사용했었다.
  * ClassOne, ClassTwo는 concerete class으로써, 이 class들에 직접적으로 dependency 하게 되면 concrete 클래스에 변경이 생길 때
- * (새로운 attributes을 추가해서 constructor에 변화가 생긴다던지, 새로운 )
+ * (새로운 attributes을 추가해서 constructor에 변화가 생긴다던지, method에 )
  * 
  * **/
 interface InterfaceOne {
@@ -40,8 +40,18 @@ class Client{
         this.itf = new ClassTwo();// 실제 ClassTwo에 dependency 되어있다.
                                   // ClassTwo에 수정이 발생하면 이 부분도 수정해주어야 한다.
     }
+}
 
 
+class ClassFactory{
+    public static InterfaceOne makeOne(){
+        return new ClassOne();
+    }
+
+    public static InterfaceOne makeTwo() {
+        return new ClassTwo();
+    }
+    
 }
 
 class Driver{
