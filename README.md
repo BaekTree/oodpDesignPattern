@@ -1,3 +1,4 @@
 # oodpDesignPattern
 ## Command
 ## Focade
+## Strategy
