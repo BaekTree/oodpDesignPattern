@@ -21,6 +21,13 @@
  * Client에서 InterfaceOne에 어떤 instance을 줄지 결정하는 setFunction은 직접적으로 new ClassOne, new ClassTwo
  * 으로 dependency하고 있다.
  * 
+ * 
+ * goodcode22.java
+ * 실제로 ClassTwo에 변화가 생긴다면? 얼마나 많은 부분을 고쳐야 할까?
+ * ClassTwo에 attribute을 추가하고
+ * constructor을 변화시키고
+ * method에 parameter을 추가해보자!
+ * 
  * **/
 interface InterfaceOne {
     void method();
@@ -32,15 +39,32 @@ class ClassOne implements InterfaceOne {
     }
 }
 
-class ClassTwo implements InterfaceOne{
+class ClassTwo implements InterfaceOne{ //ClassTwo 변화
+    private int i;                      // attribute 추가
+    private int j;
+
+    public ClassTwo(int i){             //constructor 추가
+        this.i = i;
+        this.j = i + 2;                     
+    }
+
     public void method(){
-        System.out.println("two method");
+        System.out.println("two method: attribute int i : " + i);
+    }
+
+
+    //이걸 이렇게 만들면 단일책임원칙을 위반하는가? Single Responsibility Principle?
+    //새로운 class으로 만들어야 하는가?
+    public void methodTwo(int k){
+        System.out.println("two methodTwo: attribute int k : " + k);
     }
 }
+
 
 class Client{
     InterfaceOne itf;   //association to InterfaceOne
     public void function(){
+        //여기서 strategy라도 써줘야 하나?
         itf.method();   //interface에 dependency 되어있다. 구현되는 부분에는 자유롭다.
     }
 
@@ -49,9 +73,10 @@ class Client{
                                     // ClassOne에 수정이 발생하면 이 부분도 수정해주어야 한다.
     }
 
-    public void setItfTwo(){
-        this.itf = new ClassTwo();// 실제 ClassTwo에 dependency 되어있다.
+    public void setItfTwo(int num){
+        this.itf = new ClassTwo(num);// 실제 ClassTwo에 dependency 되어있다.
                                   // ClassTwo에 수정이 발생하면 이 부분도 수정해주어야 한다.
+                                  // ClassTwo의 변화에 따라서 Client도 변화되었다.
     }
 
 
@@ -64,7 +89,8 @@ class Driver{
         client.setItfOne();
         client.function();
 
-        client.setItfTwo();
+        client.setItfTwo(22);
         client.function();
+        client.
     }
 }
