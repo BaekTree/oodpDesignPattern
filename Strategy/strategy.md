@@ -18,4 +18,6 @@
     * Strtegy class
     * Interface
     * concrete class, which implements interface
-* 
+* 일반적인 상속의 문제점:
+    * 공통되는 부분을 parent class가 맡는다. 캡슐화.
+    * child class 마다 다르게 동작하는 부분이 있다. 
