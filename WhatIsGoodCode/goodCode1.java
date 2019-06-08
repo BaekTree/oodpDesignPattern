@@ -20,10 +20,14 @@ class ClassOne{
 
 class Client{
     ClassOne cls = new ClassOne();  // 문제점 1: classOne에 dependency 되어있다. 
+                                    //만약 constructor가 변경된다면? 새로운 attribute가 추가된다면?
+                                    //ClassOne에 와서 고치고, 여기 와서 또 고쳐야 한다.
     
     public void function(){ 
         cls.method();               //문제점2: classOne에 method도 dependency 되어있다. 
                                     //만약 ClassOne이 변경되면 다 싸그리 고쳐야 한다.
+                                    //만약 method에 parameter가 추가된다면?
+                                    // ClassOne에 와서 고치고, 여기 와서 또 고쳐야 한다.
     }
     
 }

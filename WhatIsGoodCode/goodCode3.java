@@ -1,7 +1,10 @@
 /**
  * goodcode3
  * 
- * 
+ * 문제점: 
+ * Client에서 InterfaceOne에 dependency하고 있다.
+ * Interface에 해당하는 ClassOne, ClassTwo 등의 instance을 polymorphysm을 통해서 reference해주어야 한다.
+ * 그런데 reference하기 위해서 
  * 
  * **/
 interface InterfaceOne {
