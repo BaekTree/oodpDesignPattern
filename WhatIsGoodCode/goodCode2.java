@@ -11,10 +11,15 @@
  * 해결책
  * Client에서 ClassOne에 대한 dependency를 줄여야 한다.
  * concrete한 ClassOne이 아니라 soft한 Interface을 ClassOne과 Client 사이에 두어야 한다.
- * InterfaceOne을 만들고, ClassOne이 가지는 method를 선언해준다. 
- * ClassOne은 InterfaceOne을 구현한다.
- * Client는 ClassOne대신에 InterfaceOne에 dependency한다.
+ * 두번째 문제점 해결하기!
+ ***** InterfaceOne을 만들고, ClassOne이 가지는 method를 선언해준다. 
+ ***** ClassOne은 InterfaceOne을 구현한다.
+ ***** Client는 ClassOne대신에 InterfaceOne에 dependency한다.
  * 
+ * 여전히 문제점 1은 그대로 가지고 있다.
+ * Client의 function은 InterfaceOne의 method으로 구현했어서 ClassOne에 대한 직접적인 dependency는 피했지만
+ * Client에서 InterfaceOne에 어떤 instance을 줄지 결정하는 setFunction은 직접적으로 new ClassOne, new ClassTwo
+ * 으로 dependency하고 있다.
  * 
  * **/
 interface InterfaceOne {
@@ -35,7 +40,6 @@ class ClassTwo implements InterfaceOne{
 
 class Client{
     InterfaceOne itf;   //association to InterfaceOne
-    
     public void function(){
         itf.method();   //interface에 dependency 되어있다. 구현되는 부분에는 자유롭다.
     }
