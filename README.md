@@ -1,4 +1,5 @@
 # oodpDesignPattern
+## What is good code?
 ## Command
 ## Focade
 ## Strategy
