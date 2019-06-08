@@ -43,13 +43,24 @@ class Client{
         itf = ClassFactory.makeTwo();
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8db5f3c1ce864e048bc91a72bad2eea5511d05c5
 
 class ClassFactory{
     public static InterfaceOne makeOne(){
         return new ClassOne();
     }
 
+<<<<<<< HEAD
+class ClassFactory{
+    public static InterfaceOne makeOne(){
+        return new ClassOne();
+    }
+
+=======
+>>>>>>> 8db5f3c1ce864e048bc91a72bad2eea5511d05c5
     public static InterfaceOne makeTwo() {
         return new ClassTwo();
     }
