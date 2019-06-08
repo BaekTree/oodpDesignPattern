@@ -32,14 +32,14 @@ class ClassOne implements InterfaceOne {
     }
 }
 
-class ClassTwo implements InterfaceOne{
-    private int i;
+class ClassTwo implements InterfaceOne{ //ClassTwo 변화
+    private int i;                      // attribute 추가
 
-    public ClassTwo(int i){
-        this.i = i;
+    public ClassTwo(int i){             //constructor 추가
+        this.i = i;                     
     }
 
-    public void method(int i){
+    public void method(){
         System.out.println("two method: attribute int i : " + i);
     }
 }
@@ -55,9 +55,10 @@ class Client{
                                     // ClassOne에 수정이 발생하면 이 부분도 수정해주어야 한다.
     }
 
-    public void setItfTwo(){
-        this.itf = new ClassTwo();// 실제 ClassTwo에 dependency 되어있다.
+    public void setItfTwo(int num){
+        this.itf = new ClassTwo(num);// 실제 ClassTwo에 dependency 되어있다.
                                   // ClassTwo에 수정이 발생하면 이 부분도 수정해주어야 한다.
+                                  // ClassTwo의 변화에 따라서 Client도 변화되었다.
     }
 
 
@@ -70,7 +71,7 @@ class Driver{
         client.setItfOne();
         client.function();
 
-        client.setItfTwo();
+        client.setItfTwo(22);
         client.function();
     }
 }
