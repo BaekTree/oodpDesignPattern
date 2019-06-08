@@ -9,7 +9,9 @@
  * (새로운 attributes을 추가해서 constructor에 변화가 생긴다던지, method에 parameter가 추가되어야 한다든지...)
  * Client에서도 똑같이 바꿔줘야 했다.
  * 
- * 
+ * Class factory class 의 도입으로 Client는 이제 직접 ClassOne, ClassTwo에 dependency하지 않는다.
+ * 대신 Client는 ClassFactory 에 dependency 한다.
+ * ClassFactory가 대신 ClassOne, ClassTwo에 dependency한다.
  * 
  * 
  * **/
@@ -43,24 +45,12 @@ class Client{
         itf = ClassFactory.makeTwo();
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 8db5f3c1ce864e048bc91a72bad2eea5511d05c5
 
 class ClassFactory{
     public static InterfaceOne makeOne(){
         return new ClassOne();
     }
 
-<<<<<<< HEAD
-class ClassFactory{
-    public static InterfaceOne makeOne(){
-        return new ClassOne();
-    }
-
-=======
->>>>>>> 8db5f3c1ce864e048bc91a72bad2eea5511d05c5
     public static InterfaceOne makeTwo() {
         return new ClassTwo();
     }
@@ -73,7 +63,7 @@ class Driver{
         
         client.setItfOne();
         client.function();
-
+    
         client.setItfTwo();
         client.function();
     }
