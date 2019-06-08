@@ -17,10 +17,13 @@
  * 높은 유연성을 얻는다.
  * 왜? 
  *  비교해보자...
+ *  ClassTwo의 method가 변경되었다.
+ *  ClassThree가 생겼다.
  *  
  * 
  * 
  * **/
+import java.lang.Math;
 interface InterfaceOne {
     void method();
 }
@@ -31,9 +34,29 @@ class ClassOne implements InterfaceOne {
     }
 }
 
+//ClassTwo method 변화. attribute 추가
 class ClassTwo implements InterfaceOne{
+    private int j;
+
+    public ClassTwo(){}
+
+    public ClassTwo(int j){
+        this.j = j;
+    }
+
     public void method(){
         System.out.println("two method");
+    }
+
+    public void method(int i){
+        System.out.println("two method: int i = " + i);
+    }
+}
+
+//ClassThree 생성
+class ClassThree implements InterfaceOne{
+    public void method(){
+        System.out.println("three method");
     }
 }
 
@@ -47,8 +70,13 @@ class Client{
         itf = ClassFactory.makeOne();
     }
 
-    public void setItfTwo(){
-        itf = ClassFactory.makeTwo();
+    public void setItfTwo(int num){
+        itf = ClassFactory.makeTwo(num);
+    }
+
+    //ClassThree을 불러오기 위한 factory 호출
+    public void setItfThree(){
+        itf = ClassFactory.makeThree();
     }
 }
 
@@ -57,8 +85,13 @@ class ClassFactory{
         return new ClassOne();
     }
 
-    public static InterfaceOne makeTwo() {
-        return new ClassTwo();
+    public static InterfaceOne makeTwo(int num) {
+        return new ClassTwo(num);
+    }
+
+    //ClassThree instance 만들기 위한 method 생성
+    public static InterfaceOne makeThree(){
+        return new ClassThree();
     }
     
 }
@@ -70,7 +103,12 @@ class Driver{
         client.setItfOne();
         client.function();
     
-        client.setItfTwo();
+        int rand = (int)(Math.random()*10)+1;
+        client.setItfTwo(rand);
+        client.function();
+
+        //main에서 clientThree 추가
+        client.setItfThree();
         client.function();
     }
 }
