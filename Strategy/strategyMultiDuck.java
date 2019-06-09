@@ -4,30 +4,31 @@ class Driver{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
-        while(true){
-            System.out.println("choice fly mode");
-            System.out.println("\tfloat: 1\n\twing: 2\n\tquit: 0");
-            int choice = input.nextInt();
-            if(choice == 0)
-                break;
+        // Flying mode test
+        // while(true){
+        //     System.out.println("choice fly mode");
+        //     System.out.println("\tfloat: 1\n\twing: 2\n\tquit: 0");
+        //     int choice = input.nextInt();
+        //     if(choice == 0)
+        //         break;
             
-            Duck duck = new Duck();
+        //     Duck duck = new Duck();
             
-            if(choice == 1){
-                duck.setFly("F");
-            }
-            else if(choice == 2){
-                duck.setFly("W");
-            }
-            else{
-                System.out.println("Wrong number!");
-                continue;
-            }
+        //     if(choice == 1){
+        //         duck.setFly("F");
+        //     }
+        //     else if(choice == 2){
+        //         duck.setFly("W");
+        //     }
+        //     else{
+        //         System.out.println("Wrong number!");
+        //         continue;
+        //     }
 
-            duck.fly();
+        //     duck.fly();
+        // }//while
 
-
-        }
+        
         System.out.println("BaBye~~!");
     }
 
@@ -71,6 +72,26 @@ class Duck{
 
 }
 
+class NormalDuck extends Duck{
+    public NormalDuck(){
+        this.ff = new Float();
+        this.mv = new Walk();
+    }
+}
+
+class EngelDuck extends Duck{
+    public EngelDuck(){
+        this.ff = new Wing();
+        this.mv = new Walk();
+    }
+}
+
+class LightningDuck extends Duck{
+    public LightningDuck(){
+        this.ff = new Wing();
+        this.mv = new Sprint();
+    }
+}
 
 interface InterfaceFly{
     void execute();
