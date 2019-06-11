@@ -68,3 +68,22 @@ static method는 static method, static var만 사용가능. instance var, instan
  
 * 여기서 해석 가능한 사실
 >instance method 안에서 다른 instance method을 호출할 때, instance을 또 다시 안붙여도 된다.
+
+##패턴의 부재에서 오는 문제점들
+* 동일한 코드의 중복
+    * 코드를 수정할 때 여러 동일한 성질을 가진 클래스들을 모두 돌아다니면서 수정해야 한다. 
+    * normal duck의 크기 확대 -> 다른 모든 duck의 크기도 다 고쳐야 한다.
+    * client에서 normal duck의 
+    * 코드 재사용 불가
+    * 상속으로 해결할 수 있다.
+
+* 의존성이 커진다
+    * 한 클래스를 수정하면 그에 연결되어 있는 모든 클래스들을 다 수정하거나 새로 만들어야 한다.
+    * 버튼에 한 종류의 기계만 연결시킨다면, 새로운 기계를 추가할 때 새로운 버튼을 만들어야 한다. 
+    * 각 버튼들은 동일한 기계를 가지고 있다.
+    * 큰 버튼을 interface으로 만든다. 
+    * Interface(그리고 abstract class, 혹은 그냥 상속을 통한 parent class)을 사용하는 경우
+        * Interface에 변화가 있을 경우, client에서는 그 부분만 수정해주면 된다. 
+    
+    attribute의 이름, 타입, 초기값 수정
+    method의 이름, 파라미터, body, return 타입 수정

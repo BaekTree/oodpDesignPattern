@@ -1,18 +1,20 @@
+
 /**
  * 
- * StrategyMultiDuck2.java
+ * 
+ * Template Method 패턴 적용
  */
 
 import java.util.Scanner;
 
-class Driver{
+class Driver {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        
-        Duck engel = new EngelDuck();
-        engel.fly();
-        engel.move();
 
+        // Context = Concrete Context
+        Duck engel = new EngelDuck();
+        engel.fly(); // Context references interface and its function
+        engel.move(); // interface is set to concret through concrete context
 
         Duck normal = new NormalDuck();
         normal.fly();
@@ -23,145 +25,153 @@ class Driver{
         light.move();
         // Flying mode test
         // while(true){
-        //     System.out.println("choice fly mode");
-        //     System.out.println("\tfloat: 1\n\twing: 2\n\tquit: 0");
-        //     int choice = input.nextInt();
-        //     if(choice == 0)
-        //         break;
-            
-        //     Duck duck = new Duck();
-            
-        //     if(choice == 1){
-        //         duck.setFly("F");
-        //     }
-        //     else if(choice == 2){
-        //         duck.setFly("W");
-        //     }
-        //     else{
-        //         System.out.println("Wrong number!");
-        //         continue;
-        //     }
+        // System.out.println("choice fly mode");
+        // System.out.println("\tfloat: 1\n\twing: 2\n\tquit: 0");
+        // int choice = input.nextInt();
+        // if(choice == 0)
+        // break;
 
-        //     duck.fly();
+        // Duck duck = new Duck();
+
+        // if(choice == 1){
+        // duck.setFly("F");
+        // }
+        // else if(choice == 2){
+        // duck.setFly("W");
+        // }
+        // else{
+        // System.out.println("Wrong number!");
+        // continue;
+        // }
+
+        // duck.fly();
         // }//while
 
-        
         System.out.println("BaBye~~!");
         input.close();
     }
 
 }
 
-enum Fly{
-    FLOAT(1),
-    WING(2);
+enum Fly {
+    FLOAT(1), WING(2);
 
     private int val;
-    private Fly(int i){
+
+    private Fly(int i) {
         this.val = i;
     }
-    public int getValue(){
+
+    public int getValue() {
         return val;
     }
 }
 
-abstract class Duck{
+// Context
+abstract class Duck {
     InterfaceFly ff;
     InterfaceMove mv;
 
-    public void fly(){
-        //print who this is. Using template pattern.
+    public void fly() {
+        // print who this is. Using template pattern.
         WhoIs();
         ff.execute();
     }
 
-    public void move(){
+    public void move() {
         // print who this is. Using template pattern.
         WhoIs();
         mv.execute();
     }
 
-
-    public void setFly(String str){
-        try{
-            if(str.compareTo("F") == 0)
+    public void setFly(String str) {
+        try {
+            if (str.compareTo("F") == 0)
                 this.ff = new Float();
-            else if(str.compareTo("W") == 0)
+            else if (str.compareTo("W") == 0)
                 this.ff = new Wing();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void test(){
+    public void test() {
         System.out.println("test...");
     }
 
-    public abstract void  WhoIs();
+    public abstract void WhoIs();
 }
 
-class NormalDuck extends Duck{
-    public NormalDuck(){
+// Concrete Conext
+class NormalDuck extends Duck {
+    public NormalDuck() {
         this.ff = new Float();
         this.mv = new Walk();
     }
 
-    public void WhoIs(){
+    public void WhoIs() {
         System.out.print("NormalDuck: ");
     }
 }
 
-class EngelDuck extends Duck{
-    public EngelDuck(){
+// Concrete Conext
+class EngelDuck extends Duck {
+    public EngelDuck() {
         this.ff = new Wing();
         this.mv = new Walk();
     }
 
-     public void WhoIs(){
+    public void WhoIs() {
         System.out.print("Engel Duck: ");
     }
 }
 
-class LightningDuck extends Duck{
-    public LightningDuck(){
+// Concrete Conext
+class LightningDuck extends Duck {
+    public LightningDuck() {
         this.ff = new Wing();
         this.mv = new Sprint();
     }
 
-    public void WhoIs(){
+    public void WhoIs() {
         System.out.print("Lightning Duck: ");
     }
 }
 
-interface InterfaceFly{
+// Strategy Interface
+interface InterfaceFly {
     void execute();
 }
 
-class Float implements InterfaceFly{
-    public void execute(){
+// Concrete Strategy
+class Float implements InterfaceFly {
+    public void execute() {
         System.out.println("Float");
     }
 }
 
-class Wing implements InterfaceFly{
-    public void execute(){
+// Concrete Strategy
+class Wing implements InterfaceFly {
+    public void execute() {
         System.out.println("Wing");
     }
 }
 
-
-interface InterfaceMove{
+// Strategy interface
+interface InterfaceMove {
     void execute();
 }
 
-class Walk implements InterfaceMove{
-    public void execute(){
+// Concrete Strategy
+class Walk implements InterfaceMove {
+    public void execute() {
         System.out.println("walk");
-    } 
+    }
 }
 
-class Sprint implements InterfaceMove{
-    public void execute(){
+// Concrete Strategy
+class Sprint implements InterfaceMove {
+    public void execute() {
         System.out.println("sprint");
     }
 }
