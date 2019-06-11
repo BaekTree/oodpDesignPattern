@@ -35,9 +35,23 @@ interface ClassOne extends InterfaceOne{
     void method();
 }
 
-class ClassOneA implements ClassOne {
+abstract class ClassOneA implements ClassOne {
     public void method() {
         System.out.println("oneA method");
+    }
+
+    public abstract void method2();
+}
+
+class ClassOneA1 extends ClassOneA{
+    public void method2(){
+        System.out.println("oneA1 method!");
+    }
+}
+
+class ClassOneA2 extends ClassOneA {
+    public void method2() {
+        System.out.println("oneA2 method!");
     }
 }
 
@@ -57,12 +71,13 @@ class ClassTwo implements InterfaceOne{
 class Client{
     InterfaceOne itf;   //association to InterfaceOne
     // ClassFactory factory = new ClassFactory();
+    ClassOneFactory one = new ClassOneFactory();
     public void function(){
         itf.method();   //interface에 dependency 되어있다. 구현되는 부분에는 자유롭다.
     }
 
     public void setItfOne(String str){
-        itf = ClassOneFactory.makeOne(str);
+        itf = one.makeOne(str);
     }
 
     public void setItfTwo(){
@@ -82,14 +97,26 @@ class ClassTwoFactory{
     }   
 }
 
-/**
- * class ClassOneFactory
- */
-class ClassOneFactory{
-    public static ClassOne makeOne(String a){
-        if("A".equals(a)) return new ClassOneA();
-        if("B".equals(a)) return new ClassOneB();
+//interface classOneFactory
+abstract class ClassOneFactory{
+
+    public abstract ClassOne makeOne(String str);
+
+}
+
+class OneAFtr extends ClassOneFactory{
+    public ClassOne makeOne(String str){
+        if(str.equals("2"))
+            return new ClassOneA2();
+        else if(str.equals("1"))
+            return new ClassOneA1();
         return null;
+    }
+}
+
+class OneBFtr extends ClassOneFactory{
+    public ClassOne makeOne(String str){
+        return new ClassOneB();
     }
 }
 
@@ -97,7 +124,7 @@ class Driver{
     public static void main(String[] args) {
         Client client = new Client();
         
-        client.setItfOne("A");
+        client.setItfOne("1");
         client.function();
     
         client.setItfTwo();

@@ -107,3 +107,4 @@ static method는 static method, static var만 사용가능. instance var, instan
     * L
     * ISP
     * DIP: Dependency 
+* 디자인 패턴은 귀에 걸면 귀걸이, 코에 걸면 코걸이이다. 명확하게 구분되지 않는다! 
