@@ -14,6 +14,11 @@
  * ClassFactory가 대신 ClassOne, ClassTwo에 dependency한다.
  * 
  * 
+ * goodcode2에서는 method의 dependency을 제거했다.
+ * goodcode3에서는 생성의 부분에서 dependency을 제거했다.
+ * 이제 Client는 concrete class들에 어떠한 dependency도 갖지 않는다.
+ * 
+ * 
  * **/
 interface InterfaceOne {
     void method();
@@ -31,6 +36,8 @@ class ClassTwo implements InterfaceOne{
     }
 }
 
+//Client: 이제 더 이상 concrete Class들에 의존하지 않는다. 
+//대신 ClassFactory라는 class에 의존하고, ClassFactory가 object을 생성해서 Client에게 보내준다. 
 class Client{
     InterfaceOne itf;   //association to InterfaceOne
     public void function(){
@@ -46,6 +53,8 @@ class Client{
     }
 }
 
+
+//factory class
 class ClassFactory{
     public static InterfaceOne makeOne(){
         return new ClassOne();
