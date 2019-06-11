@@ -82,6 +82,9 @@ class ClassTwoFactory{
     }   
 }
 
+/**
+ * class ClassOneFactory
+ */
 class ClassOneFactory{
     public static ClassOne makeOne(String a){
         if("A".equals(a)) return new ClassOneA();
