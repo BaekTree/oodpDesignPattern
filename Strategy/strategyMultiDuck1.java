@@ -10,9 +10,10 @@ class Driver{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
+        //Context = Concrete Context
         Duck engel = new EngelDuck();
-        engel.fly();
-        engel.move();
+        engel.fly();    //Context references interface and its function
+        engel.move();   //interface is set to concret through concrete context
 
 
         Duck normal = new NormalDuck();
@@ -66,6 +67,7 @@ enum Fly{
     }
 }
 
+//Context 
 abstract class Duck{
     InterfaceFly ff;
     InterfaceMove mv;
@@ -101,66 +103,77 @@ abstract class Duck{
     public abstract void  WhoIs();
 }
 
+//Concrete Conext 
 class NormalDuck extends Duck{
     public NormalDuck(){
         this.ff = new Float();
         this.mv = new Walk();
     }
 
+    // hook method
     public void WhoIs(){
         System.out.print("NormalDuck: ");
     }
 }
 
+// Concrete Conext
 class EngelDuck extends Duck{
     public EngelDuck(){
         this.ff = new Wing();
         this.mv = new Walk();
     }
 
+    // hook method
      public void WhoIs(){
         System.out.print("Engel Duck: ");
     }
 }
 
+// Concrete Conext
 class LightningDuck extends Duck{
     public LightningDuck(){
         this.ff = new Wing();
         this.mv = new Sprint();
     }
 
+    //hook method
     public void WhoIs(){
         System.out.print("Lightning Duck: ");
     }
 }
 
+//Strategy Interface
 interface InterfaceFly{
     void execute();
 }
 
+//Concrete Strategy
 class Float implements InterfaceFly{
     public void execute(){
         System.out.println("Float");
     }
 }
 
+// Concrete Strategy
 class Wing implements InterfaceFly{
     public void execute(){
         System.out.println("Wing");
     }
 }
 
-
+// Strategy interface
 interface InterfaceMove{
     void execute();
 }
 
+// Concrete Strategy
 class Walk implements InterfaceMove{
     public void execute(){
         System.out.println("walk");
     } 
 }
 
+// Concrete Strategy
 class Sprint implements InterfaceMove{
     public void execute(){
         System.out.println("sprint");
