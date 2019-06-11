@@ -2,6 +2,7 @@
 ## Component
 * Description:
     * 동일한 목적을 가지고 같은 기능을 하는 다양한 방법들이 있을 때, 그 방법들을 모두 class으로 만든다.
+    * 같은 목적에 따라 어떤 방법을 사용할지를 선택하기 때문에, 전략 패턴이라고 불린다. 
     * <p style='color:lightblue'>method signiture은 동일해야 한다.<p/>
     
     >* **<p style='color:lightgreen'>차이점 between command pattern, strategy pattern, template method pattern<p/>**
