@@ -29,9 +29,10 @@ class Driver{
 
         }
         System.out.println("BaBye~~!");
-    }
+        input.close();
+    }//main
 
-}
+}//Driver
 
 enum Fly{
     FLOAT(1),
