@@ -17,6 +17,10 @@
  * 
  * 번외편: ClassOne만 세분화하기! 
  * 
+ * ClassOne -> ClassOneA, ClassOneA1, ClassOneA2, ClassOneB.
+ * 사실 goodCode4는 너무 단순한 구조에 복잡한 factory method을 구현하려고 시도했다...
+ * 그래서 너무 헷갈리게 되어버림 ㅜㅜ
+ * 
  * **/
 interface InterfaceOne {
     void method();
@@ -40,17 +44,17 @@ abstract class ClassOneA implements ClassOne {
         System.out.println("oneA method");
     }
 
-    public abstract void method2();
+    // public abstract void method2();
 }
 
 class ClassOneA1 extends ClassOneA{
-    public void method2(){
+    public void method(){
         System.out.println("oneA1 method!");
     }
 }
 
 class ClassOneA2 extends ClassOneA {
-    public void method2() {
+    public void method() {
         System.out.println("oneA2 method!");
     }
 }
@@ -71,13 +75,20 @@ class ClassTwo implements InterfaceOne{
 class Client{
     InterfaceOne itf;   //association to InterfaceOne
     // ClassFactory factory = new ClassFactory();
-    ClassOneFactory one = new ClassOneFactory();
+    // ClassOneFactory one = new ClassOneFactory();
+    ClassOneFactory one;
     public void function(){
         itf.method();   //interface에 dependency 되어있다. 구현되는 부분에는 자유롭다.
     }
 
-    public void setItfOne(String str){
+    public void setItfOneA(String str){
+        one = new OneAFtr();
         itf = one.makeOne(str);
+    }
+
+    public void setItfOneB() {
+        one = new OneBFtr();
+        itf = one.makeOne();
     }
 
     public void setItfTwo(){
@@ -99,9 +110,8 @@ class ClassTwoFactory{
 
 //interface classOneFactory
 abstract class ClassOneFactory{
-
     public abstract ClassOne makeOne(String str);
-
+    public abstract ClassOne makeOne();
 }
 
 class OneAFtr extends ClassOneFactory{
@@ -112,19 +122,26 @@ class OneAFtr extends ClassOneFactory{
             return new ClassOneA1();
         return null;
     }
+    
+    public ClassOne makeOne() {return null;}
+
 }
 
 class OneBFtr extends ClassOneFactory{
-    public ClassOne makeOne(String str){
+    public ClassOne makeOne(){
         return new ClassOneB();
     }
+    public ClassOne makeOne(String str){return null;}
 }
 
 class Driver{
     public static void main(String[] args) {
         Client client = new Client();
         
-        client.setItfOne("1");
+        client.setItfOneA("1");
+        client.function();
+
+        client.setItfOneB();
         client.function();
     
         client.setItfTwo();
