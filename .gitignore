@@ -38,3 +38,8 @@
 
 # vscode directory
 .vscode/
+
+#Eclipse files
+.classpath
+.project
+/run
