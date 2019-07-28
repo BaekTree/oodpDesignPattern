@@ -58,7 +58,8 @@ class NewsMachine implements Publisher {
         return news;
     }
     
-    
+
+
     
 }
 
